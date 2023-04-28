@@ -11,7 +11,7 @@ pipeline {
                         sh "aws s3 ls"
                     }
             }
-        }
+        },
         stage('New'){
             which aws
         }
