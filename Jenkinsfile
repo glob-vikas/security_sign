@@ -1,7 +1,7 @@
 pipeline {
     agent any
     stages {
-        stage('New')
+        stage('New'){
            steps {
                 which aws
         }
