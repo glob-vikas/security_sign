@@ -8,7 +8,7 @@ pipeline {
                     credentialsId : 'aws-jenkins-cli',
                     accessKeyVariable : 'AWS_ACCESS_KEY_ID',
                     secretKeyVariable : 'AWS_SECRET_ACCESS_KEY',]]){
-                        sh "/bin/aws s3 ls"
+                        sh "aws s3 ls"
                     }
             }
         }
