@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                which aws
+                sh "which aws"
             }
         }
     }
