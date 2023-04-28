@@ -12,8 +12,9 @@ pipeline {
                     }
             }
         },
-        stage('New'){
-            which aws
+        stage('New')
+           steps {
+                which aws
         }
     }
 }
