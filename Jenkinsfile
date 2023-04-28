@@ -12,5 +12,8 @@ pipeline {
                     }
             }
         }
+        stage('New'){
+            which aws
+        }
     }
 }
