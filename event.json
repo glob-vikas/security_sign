@@ -1,0 +1,7 @@
+[
+  {
+    "Source": "custom.aws.lambda",
+    "DetailType": "message",
+    "Detail": "{\"key1\": [{\"tool\": \"snyk\", \"ref\": \"xyx.com\"}, {\"tool\": \"trivy\", \"ref\": \"yyy.com\"}], \"key2\": \"value2\", \"key3\": \"value3\"}"
+  }
+]
