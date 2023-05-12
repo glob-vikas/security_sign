@@ -4,7 +4,7 @@ pipeline {
         stage('Build') {
             steps {
                when {
-                    expression { env.BRANCH_NAME == 'master' }
+                    expression { env.BRANCH_NAME == 'main' }
                 }
                 steps {
                     echo "Hello"
