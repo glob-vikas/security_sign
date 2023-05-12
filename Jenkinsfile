@@ -2,9 +2,13 @@ pipeline {
     agent any
     stages {
             stage('Build') {
+                when {
+                    when (env.BRANCH_NAME == 'main'){
+                    }
+                }                    
                 steps {
                     script{
-                        if (env.BRANCH_NAME == 'main'){
+                        // if (env.BRANCH_NAME == 'main'){
                             // echo currentBuild.changeSets
                             // sh "git diff --quiet --exit-code HEAD~1..HEAD upload_file.json"
                             // files = sh "git diff-tree --no-commit-id --name-only -r ${env.GIT_COMMIT}"
@@ -22,11 +26,12 @@ pipeline {
                                             //sh "aws s3api create-bucket --bucket from-jenkins-9012 --region us-east-1"
                                             echo "uploaded"
                                             sh "aws s3 cp upload_file.json s3://from-jenkins-9012 --region us-east-1"
+                                            sh "aws s3 cp event.json s3://from-jenkins-9012 --region us-east-1"
                                             // sh "aws events put-events --entries file://event.json --region ap-northeast-1"
                                         }
                                 }
                             // }
-                        }
+                        // }
                     }
             }
         }
