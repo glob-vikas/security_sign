@@ -5,7 +5,8 @@ pipeline {
                 steps {
                     script{
                         if (env.BRANCH_NAME == 'main'){
-                            sh "git diff --quiet --exit-code HEAD~1..HEAD upload_file.json"
+                            echo currentBuild.changeSets
+                            // sh "git diff --quiet --exit-code HEAD~1..HEAD upload_file.json"
                         }
                     }
                     // withCredentials([[
