@@ -10,7 +10,7 @@ pipeline {
                             files = sh "git diff-tree --no-commit-id --name-only -r ${env.GIT_COMMIT}"
                             // if (sh "git diff-tree --no-commit-id --name-only -r ${env.GIT_COMMIT}" == "upload_file.json"){
                                 // "git diff --quiet upload_file.json"
-                                echo "Hello ${files}"
+                                echo "Heljlo ${files}"
                             // }
                         }
                     }
