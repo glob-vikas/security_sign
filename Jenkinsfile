@@ -1,3 +1,11 @@
+def upload_to_s3(files) {
+    sh "echo Going to echo a list"
+    for (int i = 0; i < files.size(); i++) {
+        sh "echo Hello ${files[i]}"
+    }
+}
+
+
 pipeline {
     agent any
     stages {
@@ -11,10 +19,9 @@ pipeline {
                             def files = sh (returnStdout: true, script: "git diff-tree --no-commit-id --name-only -r ${env.GIT_COMMIT}").split()
                             echo "status"
                             echo "${files}"
+                            upload_to_s3(files)
                             echo "Ok"
-                            files.each(i){
-                                echo "${i}"
-                            }
+
                             // if (sh "git diff-tree --no-commit-id --name-only -r ${env.GIT_COMMIT}" == "upload_file.json"){
                                 // path = "upload_file.json event.json"
                                 // try{
