@@ -9,7 +9,7 @@ pipeline {
                             // sh "git diff --quiet --exit-code HEAD~1..HEAD upload_file.json"
                             files = sh "git diff-tree --no-commit-id --name-only -r ${env.GIT_COMMIT}"
                             // if (sh "git diff-tree --no-commit-id --name-only -r ${env.GIT_COMMIT}" == "upload_file.json"){
-                                // "git diff --quiet upload_file.json"
+                                sh "git diff --quiet upload_file.json && exit 0"
                                 echo "Heljlo ${files}"
                             // }
                         }
