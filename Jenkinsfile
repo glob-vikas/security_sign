@@ -1,10 +1,13 @@
 pipeline {
     agent any
     stages {
-        if(env.BRANCH_NAME == 'master'){
             stage('Build') {
                 steps {
-                    echo "Hello"
+                    script{
+                        if (env.BRANCH_NAME == 'master'){
+                            echo "Hello"
+                        }
+                    }
                     // withCredentials([[
                         // $class : 'AmazonWebServicesCredentialsBinding',
                         // credentialsId : 'aws-jenkins-cli',
@@ -13,7 +16,6 @@ pipeline {
                             ////sh "aws s3api create-bucket --bucket from-jenkins-9012 --region us-east-1"
                             // sh "aws events put-events --entries file://event.json --region ap-northeast-1"
                         // }
-                }
             }
         }
     }
