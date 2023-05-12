@@ -5,7 +5,7 @@ pipeline {
                 steps {
                     script{
                         if (env.BRANCH_NAME == 'main'){
-                            sh "git diff --quiet --exit-code HEAD~1..HEAD /home/vikas.deep/custom_folder/my_test/git/security_sign/upload_file.json"
+                            sh "git diff --quiet --exit-code HEAD~1..HEAD upload_file.json"
                         }
                     }
                     // withCredentials([[
