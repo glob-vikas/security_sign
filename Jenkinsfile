@@ -9,7 +9,9 @@ pipeline {
                             // sh "git diff --quiet --exit-code HEAD~1..HEAD upload_file.json"
                             // def files = sh "git diff-tree --no-commit-id --name-only -r ${env.GIT_COMMIT}"
                             def files = sh (returnStdout: true, script: "git diff-tree --no-commit-id --name-only -r ${env.GIT_COMMIT}").split()
+                            echo "status"
                             echo "${files}"
+                            echo "Ok"
                             // if (sh "git diff-tree --no-commit-id --name-only -r ${env.GIT_COMMIT}" == "upload_file.json"){
                                 // path = "upload_file.json event.json"
                                 // try{
