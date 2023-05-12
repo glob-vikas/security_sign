@@ -10,8 +10,12 @@ pipeline {
                             files = sh "git diff-tree --no-commit-id --name-only -r ${env.GIT_COMMIT}"
                             // if (sh "git diff-tree --no-commit-id --name-only -r ${env.GIT_COMMIT}" == "upload_file.json"){
                                 path = "upload_file.json"
-                                sh "git diff --quiet --exit-code HEAD~1..HEAD ${path}"
-                                echo "Heljlo ${files}"
+                                try{
+                                    sh "git diff --quiet --exit-code HEAD~1..HEAD ${path}"
+                                }
+                                catch (err){
+                                    echo "Hello ${files}"
+                                }
                             // }
                         }
                     }
