@@ -12,6 +12,9 @@ pipeline {
                             echo "status"
                             echo "${files}"
                             echo "Ok"
+                            files.each(count){
+                                echo "${count}"
+                            }
                             // if (sh "git diff-tree --no-commit-id --name-only -r ${env.GIT_COMMIT}" == "upload_file.json"){
                                 // path = "upload_file.json event.json"
                                 // try{
