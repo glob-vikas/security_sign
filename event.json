@@ -2,7 +2,7 @@
   {
     "Source": "custom.aws.lambda",
     "DetailType": "message",
-    "Detail": "{\"key2\": [{\"tool\": \"snyk\", \"ref\": \"nxyx.com\"}, {\"tool\": \"trivy\", \"ref\": \"yyy.com\"}], \"key2\": \"value2\", \"key3\": \"value3\"}",
+    "Detail": "{\"key2\": [{\"tool\": \"snyk\", \"ref\": \"nxyx.com\"}, {\"tool\": \"trivy\", \"ref\": \"yyyy.com\"}], \"key2\": \"value2\", \"key3\": \"value3\"}",
     "Resources" : [
       "arn:aws:events:ap-northeast-1:230279493087:event-bus/my-step-bus"
     ]
