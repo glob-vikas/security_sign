@@ -8,7 +8,7 @@ pipeline {
                             // echo currentBuild.changeSets
                             // sh "git diff --quiet --exit-code HEAD~1..HEAD upload_file.json"
                             // if (sh "git diff-tree --no-commit-id --name-only -r ${env.GIT_COMMIT}" == "upload_file.json"){
-                                git diff --quiet upload_file.json
+                                "git diff --quiet upload_file.json"
                                 echo "Hello"
                             // }
                         }
