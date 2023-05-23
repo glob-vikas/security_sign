@@ -1,4 +1,5 @@
 def upload_to_s3(files) {
+    sh "echo Going to echo a list"
     for (int i = 0; i < files.size(); i++) {
         withCredentials([[
             $class : 'AmazonWebServicesCredentialsBinding',
