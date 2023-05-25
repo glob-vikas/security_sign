@@ -3,7 +3,8 @@ name: pre-commit
 
 on:
   pull_request:
-    branches: ['!master']
+    branches:
+      - 'PR/**'
 jobs:
   pre-commit:
     runs-on: ubuntu-latest
