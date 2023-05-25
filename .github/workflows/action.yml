@@ -4,6 +4,7 @@ on:
   pull_request:
     types:
       - closed
+    branches: [*]
 jobs:
   name: pre-commit
   description: run pre-commit
