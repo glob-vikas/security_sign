@@ -1,6 +1,6 @@
 # Security Release Review Automation
 
-This is the repository for the SRRA, written in Python.
+This is the repository for the SRRA, written in Python .
 
 ## Local development
 
