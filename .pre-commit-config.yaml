@@ -35,7 +35,6 @@ repos:
       - id: mypy
         entry: sh -c 'PYTHONPATH="${PWD}/src" TYPE_CHECKING=1 exec mypy "$@"' --
         args:
-          - --config-file=src/setup.cfg
           - --show-absolute-path
         files: ^src/
         additional_dependencies: [types-all]
