@@ -3,7 +3,7 @@
 on:
   pull_request:
     types:
-      - cl  osed
+      - closed
 jobs:
   name: pre-commit
   description: run pre-commit
