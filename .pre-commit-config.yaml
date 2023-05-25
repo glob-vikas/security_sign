@@ -44,7 +44,7 @@ repos:
         files: ^src/
         additional_dependencies: [types-all]
   - repo: https://github.com/pre-commit/mirrors-pylint
-    rev: v3.0.0a4
+    rev: v3.0.0a5
     hooks:
       - id: pylint
         args: [--rcfile=src/.pylintrc]
