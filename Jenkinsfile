@@ -36,11 +36,11 @@ pipeline {
                                     def file_name = files[index+1].split('/')[-1]
                                     if (files[index] == "A"){
                                         echo "create"
-                                        create_list = create_list + file_name
+                                        create_list.add(file_name)
                                         // def res = httpRequest(url: 'https://rkcn3zza99.execute-api.us-east-1.amazonaws.com/poc/create-poc', acceptType: 'APPLICATION_JSON', contentType: 'APPLICATION_JSON', httpMode: 'POST', requestBody: "")
                                     }
                                     else if(files[index] == "M"){
-                                        update_list = update_list + file_name
+                                        update_list.add(file_name)
                                         echo "update"
                                     }
                                 }
