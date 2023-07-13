@@ -30,6 +30,8 @@ pipeline {
                             int index = 0
                             while  (index < files.length){
                                 if (files[index+1].endsWith("security_template.yaml") || files[index+1].endsWith("ignores.yaml")){
+                                    def repo_name = files[index+1].split('/')[0]
+                                    def file_name = files[index+1].split('/')[-1]
                                     if (files[index] == "A"){
                                         echo "create"
                                         echo files[index+1].split('/')[0]
@@ -37,7 +39,9 @@ pipeline {
                                     }
                                     else if(files[index] == "M"){
                                         //Update
-                                        echo files[index+1].split('/')[0]
+                                        echo files[index+1].split('/')[-1]
+                                        // def file_name = files[index+1].split('/')[-1]
+
                                         echo "update"
                                     }
                                 }
