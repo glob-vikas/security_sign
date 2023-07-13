@@ -29,7 +29,7 @@ pipeline {
                             def files = sh (returnStdout: true, script: "git diff-tree --no-commit-id --name-only -r ${env.GIT_COMMIT}").split()
                             echo "status"
                             echo "${files}"
-                            upload_to_s3(files)
+                            // upload_to_s3(files)
                             echo "Ok"
 
                             // if (sh "git diff-tree --no-commit-id --name-only -r ${env.GIT_COMMIT}" == "upload_file.json"){
