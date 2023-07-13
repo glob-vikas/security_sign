@@ -5,14 +5,14 @@ def upload_to_s3(repo_name, create_list, update_list) {
             accessKeyVariable : 'AWS_ACCESS_KEY_ID',
             secretKeyVariable : 'AWS_SECRET_ACCESS_KEY',]]){
             sh "echo Going to echo a list"
-            if (create_list.length() > 0){
+            if (create_list.size){
                 json "files": create_list
                 def body = json.toString()
                 echo body
                 def res = httpRequest(url: 'https://rkcn3zza99.execute-api.us-east-1.amazonaws.com/poc/create-poc', acceptType: 'APPLICATION_JSON', contentType: 'APPLICATION_JSON', httpMode: 'POST', requestBody: body)
                 echo res
             }
-            else if(update_list.length() > 0){
+            else if(update_list.size){
 
             }
         }
