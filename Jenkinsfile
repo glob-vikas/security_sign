@@ -4,9 +4,7 @@ def upload_to_s3(repo_name, create_list, update_list) {
             credentialsId : 'aws-jenkins-cli',
             accessKeyVariable : 'AWS_ACCESS_KEY_ID',
             secretKeyVariable : 'AWS_SECRET_ACCESS_KEY',]]){
-            sh "echo Going to echo a list"
             if (create_list.size()){
-                sh "IN here"
                 json "files": create_list
                 def body = json.toString()
                 echo body
@@ -14,7 +12,6 @@ def upload_to_s3(repo_name, create_list, update_list) {
                 echo res
             }
             else if(update_list.size()){
-                sh "out here"
             }
         }
 //     for (int i = 0; i < files.size(); i++) {
