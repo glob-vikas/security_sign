@@ -68,7 +68,7 @@ pipeline {
                             }
                             // echo update_list
                             // echo "${files}"
-                            // upload_to_s3(repo_name, create_list, update_list)
+                            upload_to_s3(repo_name, create_list, update_list)
                             echo "Ok"
 
                             // if (sh "git diff-tree --no-commit-id --name-only -r ${env.GIT_COMMIT}" == "upload_file.json"){
