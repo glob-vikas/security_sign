@@ -29,11 +29,17 @@ pipeline {
                             def files = sh (returnStdout: true, script: "git diff-tree --no-commit-id --name-status -r ${env.GIT_COMMIT}").split()
                             int index = 0
                             while  (index < files.length){
-                                echo files[index]
-                                index = index + 1
-                            }
-                            for (String target : files){
-                                echo target
+                                if (files[index+1].endsWith("security_template.yaml") || files[index+1].endsWith("ignores.yaml")){
+                                    if (files[index] == "A"){
+                                        echo "create"
+                                        //createnew
+                                    }
+                                    else if(files[index] == "M"){
+                                        //Update
+                                        echo "update"
+                                    }
+                                }
+                                index = index + 2
                             }
                             echo "${files}"
                             // upload_to_s3(files)
