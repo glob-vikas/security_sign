@@ -5,7 +5,7 @@ def upload_to_s3(repo_name, create_list, update_list) {
             accessKeyVariable : 'AWS_ACCESS_KEY_ID',
             secretKeyVariable : 'AWS_SECRET_ACCESS_KEY',]]){
             sh "echo Going to echo a list"
-            if (create_list.length > 0){
+            if (create_list.size > 0){
                 json "files": create_list
                 def body = json.toString()
                 echo body
