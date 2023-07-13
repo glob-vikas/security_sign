@@ -49,7 +49,9 @@ pipeline {
                             def update_list = []
                             def repo_name = ""
                             while  (index < files.length){
+                                echo "Yes"
                                 if (files[index+1].endsWith("security_template.yaml") || files[index+1].endsWith("ignores.yaml")){
+                                    echo "my"
                                     repo_name = files[index+1].split('/')[0]
                                     def file_name = files[index+1].split('/')[-1]
                                     if (files[index] == "A"){
@@ -66,7 +68,7 @@ pipeline {
                             }
                             // echo update_list
                             // echo "${files}"
-                            upload_to_s3(repo_name, create_list, update_list)
+                            // upload_to_s3(repo_name, create_list, update_list)
                             echo "Ok"
 
                             // if (sh "git diff-tree --no-commit-id --name-only -r ${env.GIT_COMMIT}" == "upload_file.json"){
