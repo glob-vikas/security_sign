@@ -5,7 +5,7 @@ def upload_to_s3(repo_name, create_list, update_list) {
             accessKeyVariable : 'AWS_ACCESS_KEY_ID',
             secretKeyVariable : 'AWS_SECRET_ACCESS_KEY',]]){
             sh "echo Going to echo a list"
-            if (create_list.size){
+            if (create_list.size()){
                 sh "IN here"
                 json "files": create_list
                 def body = json.toString()
@@ -13,7 +13,7 @@ def upload_to_s3(repo_name, create_list, update_list) {
                 def res = httpRequest(url: 'https://rkcn3zza99.execute-api.us-east-1.amazonaws.com/poc/create-poc', acceptType: 'APPLICATION_JSON', contentType: 'APPLICATION_JSON', httpMode: 'POST', requestBody: body)
                 echo res
             }
-            else if(update_list.size){
+            else if(update_list.size()){
                 sh "out here"
             }
         }
