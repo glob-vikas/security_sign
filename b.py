@@ -1,1 +1,1 @@
-print("teki")
+print("tekio")

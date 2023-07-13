@@ -27,6 +27,11 @@ pipeline {
                             // sh "git diff --quiet --exit-code HEAD~1..HEAD upload_file.json"
                             // def files = sh "git diff-tree --no-commit-id --name-only -r ${env.GIT_COMMIT}"
                             def files = sh (returnStdout: true, script: "git diff-tree --no-commit-id --name-status -r ${env.GIT_COMMIT}").split()
+                            int index = 0
+                            while  (index < files.length){
+                                echo files[index]
+                                index = index + 1
+                            }
                             for (String target : files){
                                 echo target
                             }
