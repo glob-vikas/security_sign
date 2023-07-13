@@ -37,6 +37,7 @@ pipeline {
                                     }
                                     else if(files[index] == "M"){
                                         //Update
+                                        echo files[index+1].split('/')[0]
                                         echo "update"
                                     }
                                 }
