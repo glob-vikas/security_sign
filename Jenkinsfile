@@ -28,25 +28,25 @@ pipeline {
                             // def files = sh "git diff-tree --no-commit-id --name-only -r ${env.GIT_COMMIT}"
                             def files = sh (returnStdout: true, script: "git diff-tree --no-commit-id --name-status -r ${env.GIT_COMMIT}").split()
                             int index = 0
+                            def create_list = []
+                            def update_list = []
                             while  (index < files.length){
                                 if (files[index+1].endsWith("security_template.yaml") || files[index+1].endsWith("ignores.yaml")){
                                     def repo_name = files[index+1].split('/')[0]
                                     def file_name = files[index+1].split('/')[-1]
                                     if (files[index] == "A"){
                                         echo "create"
-                                        echo files[index+1].split('/')[0]
-                                        def res = httpRequest(url: 'https://rkcn3zza99.execute-api.us-east-1.amazonaws.com/poc/create-poc', acceptType: 'APPLICATION_JSON', contentType: 'APPLICATION_JSON', httpMode: 'POST', requestBody: "")
+                                        create_list = create_list + file_name
+                                        // def res = httpRequest(url: 'https://rkcn3zza99.execute-api.us-east-1.amazonaws.com/poc/create-poc', acceptType: 'APPLICATION_JSON', contentType: 'APPLICATION_JSON', httpMode: 'POST', requestBody: "")
                                     }
                                     else if(files[index] == "M"){
-                                        //Update
-                                        echo files[index+1].split('/')[-1]
-                                        // def file_name = files[index+1].split('/')[-1]
-
+                                        update_list = update_list + file_name
                                         echo "update"
                                     }
                                 }
                                 index = index + 2
                             }
+                            echo update_list
                             echo "${files}"
                             // upload_to_s3(files)
                             echo "Ok"

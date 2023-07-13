@@ -1,4 +1,4 @@
 SNYK: [""]
 TRIVY: [""]
 OWASP: [""]
-CHECKOV: [""]
+CHECKOV: ["a"]
