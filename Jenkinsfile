@@ -32,7 +32,8 @@ pipeline {
                                 if (files[index+1].endsWith("security_template.yaml") || files[index+1].endsWith("ignores.yaml")){
                                     if (files[index] == "A"){
                                         echo "create"
-                                        //createnew
+                                        echo files[index+1].split('/')[0]
+                                        def res = httpRequest(url: 'https://rkcn3zza99.execute-api.us-east-1.amazonaws.com/poc/create-poc', acceptType: 'APPLICATION_JSON', contentType: 'APPLICATION_JSON', httpMode: 'POST', requestBody: "")
                                     }
                                     else if(files[index] == "M"){
                                         //Update
