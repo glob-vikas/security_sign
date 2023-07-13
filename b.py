@@ -1,1 +1,1 @@
-print("te")
+print("tek")

@@ -26,7 +26,7 @@ pipeline {
                             // echo currentBuild.changeSets
                             // sh "git diff --quiet --exit-code HEAD~1..HEAD upload_file.json"
                             // def files = sh "git diff-tree --no-commit-id --name-only -r ${env.GIT_COMMIT}"
-                            def files = sh (returnStdout: true, script: "git diff-tree --no-commit-id -r ${env.GIT_COMMIT}").split()
+                            def files = sh (returnStdout: true, script: "git diff-tree --no-commit-id --name-status -r ${env.GIT_COMMIT}").split()
                             echo "status"
                             echo "${files}"
                             // upload_to_s3(files)
