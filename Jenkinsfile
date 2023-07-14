@@ -33,7 +33,7 @@ pipeline {
                             def updates_map = ["filesAdded": [:], "filesModified": [:]]
                             def updates_json = JsonOutput.toJson(updates_map)
                             echo "b"
-                            def a = JsonOutput.prettyPrint(updates_json)
+                            def a = updates_json.toString(2)
                             echo "a"
                             echo "a"
                             echo "a"
