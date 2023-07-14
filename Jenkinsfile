@@ -4,12 +4,8 @@ def upload_to_s3(updates_map) {
             credentialsId : 'aws-jenkins-cli',
             accessKeyVariable : 'AWS_ACCESS_KEY_ID',
             secretKeyVariable : 'AWS_SECRET_ACCESS_KEY',]]){
-            if (create_list.size()){
-                def res = httpRequest(url: 'https://rkcn3zza99.execute-api.us-east-1.amazonaws.com/poc/create-poc', acceptType: 'APPLICATION_JSON', contentType: 'APPLICATION_JSON', httpMode: 'POST', requestBody: {})
-                echo "${res}"
-            }
-            else if(update_list.size()){
-            }
+            def res = httpRequest(url: 'https://rkcn3zza99.execute-api.us-east-1.amazonaws.com/poc/create-poc', acceptType: 'APPLICATION_JSON', contentType: 'APPLICATION_JSON', httpMode: 'POST', requestBody: {})
+            echo "${res}"
         }
 //     for (int i = 0; i < files.size(); i++) {
 //         withCredentials([[
