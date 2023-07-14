@@ -46,7 +46,6 @@ pipeline {
                             def update_list = []
                             def repo_name = ""
                             while  (index < files.length){
-                                echo "Yes"
                                 if (files[index+1].endsWith("security_template.yaml") || files[index+1].endsWith("ignores.yaml")){
                                     echo "my"
                                     repo_name = files[index+1].split('/')[0]
