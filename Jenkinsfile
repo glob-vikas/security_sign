@@ -9,15 +9,13 @@ def upload_to_s3(updates_map) {
             secretKeyVariable : 'AWS_SECRET_ACCESS_KEY',]]){
                 if (updates_map["filesAdded"].size()>0){
                     def create_json = JsonOutput.toJson(updates_map["filesAdded"])
-                    create_json = create_json.toString()
-                    sh "curl -X POST --header 'Content-Type: application/json' -d ${create_json} https://rkcn3zza99.execute-api.us-east-1.amazonaws.com/poc/create-poc"
+                    def create = create_json.toString()
+                    sh "curl -H 'Accept: application/json' -X POST -data ${create} https://rkcn3zza99.execute-api.us-east-1.amazonaws.com/poc/create-poc"
                     echo "Invoked Cread Project Lambda"
                 }
                 if (updates_map["filesModified"].size()>0){
                     def updates_json = JsonOutput.toJson(updates_map["filesModified"])
                     def updates = updates_json.toString()
-                    echo "${updates}"
-                    echo "Yes"
                     sh "curl -H 'Accept: application/json' -X POST --data '${updates}' https://mc7tyk45r1.execute-api.us-east-1.amazonaws.com/poc-up/update-files-poc"
                     echo "Invoked Update files Lambda"
                 }
