@@ -18,7 +18,7 @@ def upload_to_s3(updates_map) {
                     def updates = updates_json.toString()
                     echo "${updates}"
                     echo "Yes"
-                    sh "curl -X POST --header 'Content-Type: application/json' --data @- <<< '${updates}' https://mc7tyk45r1.execute-api.us-east-1.amazonaws.com/poc-up/update-files-poc"
+                    sh "curl -H 'Accept: application/json' -X POST --data '${updates}' https://mc7tyk45r1.execute-api.us-east-1.amazonaws.com/poc-up/update-files-poc"
                     echo "Invoked Update files Lambda"
                 }
         }

@@ -2,4 +2,4 @@ rule_set:
   SNYK: ["HIGH", "MEDIUM"]
   TRIVY: ["HIGH", "MEDIUM"]
   CHECKOV: ["HIGH", "MEDIUM"]
-  OWASP: ["HIGH", "MEDIUM"]
+  OWASP: ["HIGH", "MEDIUM", "Test"]
