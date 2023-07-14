@@ -31,6 +31,9 @@ pipeline {
                             def files = sh (returnStdout: true, script: "git diff-tree --no-commit-id --name-status -r ${env.GIT_COMMIT}").split()
                             int index = 0
                             def updates_map = ["filesAdded": [:], "filesModified": [:]]
+                            def updates_json = JsonOutput.toJson(updates_map)
+                            def a JsonOutput.prettyPrint(json)
+                            echo "${a}"
 
                             while  (index < files.length){
                                 if (files[index+1].endsWith("security_template.yaml") || files[index+1].endsWith("ignores.yaml")){
@@ -56,7 +59,7 @@ pipeline {
                                 index = index + 2
                             }
                             echo "${updates_map}"
-                            upload_to_s3(updates_map)
+                            // upload_to_s3(updates_map)
                         }
                     }
             }
