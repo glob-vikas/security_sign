@@ -36,7 +36,7 @@ pipeline {
                             // def files = sh "git diff-tree --no-commit-id --name-only -r ${env.GIT_COMMIT}"
                             def files = sh (returnStdout: true, script: "git diff-tree --no-commit-id --name-status -r ${env.GIT_COMMIT}").split()
                             int index = 0
-                            def updates_map = ["filesAdded": [:], "filesModified": [:]]
+                            def updates_map = {"filesAdded": {}, "filesModified": {}}
 
                             while  (index < files.length){
                                 if (files[index+1].endsWith("security_template.yaml") || files[index+1].endsWith("ignores.yaml")){
@@ -63,8 +63,8 @@ pipeline {
                             }
                             // echo update_list
                             // echo "${files}"
-                            // echo "${updates_map}"
-                            upload_to_s3(updates_map)
+                            echo "${updates_map}"
+                            // upload_to_s3(updates_map)
                             echo "Ok"
 
                             // if (sh "git diff-tree --no-commit-id --name-only -r ${env.GIT_COMMIT}" == "upload_file.json"){
