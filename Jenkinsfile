@@ -16,6 +16,8 @@ def upload_to_s3(updates_map) {
                 if (updates_map["filesModified"].size()>0){
                     def updates_json = JsonOutput.toJson(updates_map["filesModified"])
                     updates_json = updates_json.toString()
+                    echo "${updates_json}"
+                    echo "Yes"
                     sh "curl -X POST --header 'Content-Type: application/json' -d ${updates_json} https://mc7tyk45r1.execute-api.us-east-1.amazonaws.com/poc-up/update-files-poc"
                     echo "Invoked Update files Lambda"
                 }
