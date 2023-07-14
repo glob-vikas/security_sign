@@ -10,7 +10,7 @@ def upload_to_s3(updates_map) {
                 if (updates_map["filesAdded"].size()>0){
                     def create_json = JsonOutput.toJson(updates_map["filesAdded"])
                     def create = create_json.toString()
-                    sh "curl -H 'Accept: application/json' -X POST -data '${create}' https://rkcn3zza99.execute-api.us-east-1.amazonaws.com/poc/create-poc"
+                    sh "curl -H 'Accept: application/json' -X POST --data '${create}' https://rkcn3zza99.execute-api.us-east-1.amazonaws.com/poc/create-poc"
                     echo "Invoked Cread Project Lambda"
                 }
                 if (updates_map["filesModified"].size()>0){
