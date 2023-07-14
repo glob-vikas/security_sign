@@ -42,7 +42,7 @@ pipeline {
                             // def files = sh "git diff-tree --no-commit-id --name-only -r ${env.GIT_COMMIT}"
                             def files = sh (returnStdout: true, script: "git diff-tree --no-commit-id --name-status -r ${env.GIT_COMMIT}").split()
                             int index = 0
-                            def updates_map = []
+                            def updates_map = [:]
                             updates_map["filesAdded"] = []
                              for (element in updates_map) {
                                 echo "${element.key} ${element.value}"
