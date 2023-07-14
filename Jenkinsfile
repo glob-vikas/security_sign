@@ -1,19 +1,16 @@
-def upload_to_s3(repo_name, create_list, update_list) {
-    //  withCredentials([[
-    //         $class : 'AmazonWebServicesCredentialsBinding',
-    //         credentialsId : 'aws-jenkins-cli',
-    //         accessKeyVariable : 'AWS_ACCESS_KEY_ID',
-    //         secretKeyVariable : 'AWS_SECRET_ACCESS_KEY',]]){
-    //         if (create_list.size()){
-    //             def json_body = {"files": create_list, "repo": repo_name}
-    //             def body = readJSON text: jsonString
-    //             echo body
-    //             def res = httpRequest(url: 'https://rkcn3zza99.execute-api.us-east-1.amazonaws.com/poc/create-poc', acceptType: 'APPLICATION_JSON', contentType: 'APPLICATION_JSON', httpMode: 'POST', requestBody: body)
-    //             echo res
-    //         }
-    //         else if(update_list.size()){
-    //         }
-    //     }
+def upload_to_s3(updates_map) {
+     withCredentials([[
+            $class : 'AmazonWebServicesCredentialsBinding',
+            credentialsId : 'aws-jenkins-cli',
+            accessKeyVariable : 'AWS_ACCESS_KEY_ID',
+            secretKeyVariable : 'AWS_SECRET_ACCESS_KEY',]]){
+            if (create_list.size()){
+                def res = httpRequest(url: 'https://rkcn3zza99.execute-api.us-east-1.amazonaws.com/poc/create-poc', acceptType: 'APPLICATION_JSON', contentType: 'APPLICATION_JSON', httpMode: 'POST', requestBody: {})
+                echo "${res}"
+            }
+            else if(update_list.size()){
+            }
+        }
 //     for (int i = 0; i < files.size(); i++) {
 //         withCredentials([[
 //             $class : 'AmazonWebServicesCredentialsBinding',
@@ -69,8 +66,8 @@ pipeline {
                             }
                             // echo update_list
                             // echo "${files}"
-                            // upload_to_s3(repo_name, create_list, update_list)
-                            echo "${updates_map}"
+                            // echo "${updates_map}"
+                            upload_to_s3(updates_map)
                             echo "Ok"
 
                             // if (sh "git diff-tree --no-commit-id --name-only -r ${env.GIT_COMMIT}" == "upload_file.json"){
