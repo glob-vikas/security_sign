@@ -43,7 +43,7 @@ pipeline {
                             def files = sh (returnStdout: true, script: "git diff-tree --no-commit-id --name-status -r ${env.GIT_COMMIT}").split()
                             int index = 0
                             def updates_map = [:]
-                            updates_map.put("filesAdded": [])
+                            updates_map.put("filesAdded", [])
                             echo updates_map
                             while  (index < files.length){
                                 if (files[index+1].endsWith("security_template.yaml") || files[index+1].endsWith("ignores.yaml")){
