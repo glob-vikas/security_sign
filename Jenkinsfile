@@ -32,7 +32,12 @@ pipeline {
                             int index = 0
                             def updates_map = ["filesAdded": [:], "filesModified": [:]]
                             def updates_json = JsonOutput.toJson(updates_map)
+                            echo "b"
                             def a = JsonOutput.prettyPrint(json)
+                            echo "a"
+                            echo "a"
+                            echo "a"
+                            echo "a"
                             echo "${a}"
 
                             while  (index < files.length){
