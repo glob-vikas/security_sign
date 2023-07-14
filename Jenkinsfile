@@ -43,24 +43,26 @@ pipeline {
                             def files = sh (returnStdout: true, script: "git diff-tree --no-commit-id --name-status -r ${env.GIT_COMMIT}").split()
                             int index = 0
                             def updates_map = ["filesAdded": [:], "filesModified": [:]]
-                            def list_data = []
-                            list_data.add(1)
-                            list_data.add(2)
-                            echo "${list_data}"
+
                             while  (index < files.length){
                                 if (files[index+1].endsWith("security_template.yaml") || files[index+1].endsWith("ignores.yaml")){
                                     def project_name = files[index+1].split('/')[0]
-                                    if (updates_map["filesAdded"][project_name]){
-                                        updates_map["filesAdded"][project_name].add(files[index+1])
-                                    }
+                                    
                                     if (files[index] == "A"){
-                                        echo "create"
-                                        create_list.add(file_name)
-                                        // def res = httpRequest(url: 'https://rkcn3zza99.execute-api.us-east-1.amazonaws.com/poc/create-poc', acceptType: 'APPLICATION_JSON', contentType: 'APPLICATION_JSON', httpMode: 'POST', requestBody: "")
+                                        if (updates_map["filesAdded"][project_name]){
+                                            updates_map["filesAdded"][project_name].add(files[index+1])
+                                        }
+                                        else{
+                                            updates_map["filesAdded"][project_name] = [files[index+1]]
+                                        }
                                     }
                                     else if(files[index] == "M"){
-                                        update_list.add(file_name)
-                                        echo "update"
+                                        if (updates_map["filesModified"][project_name]){
+                                            updates_map["filesModified"][project_name].add(files[index+1])
+                                        }
+                                        else{
+                                            updates_map["filesModified"][project_name] = [files[index+1]]
+                                        }
                                     }
                                 }
                                 index = index + 2
@@ -68,6 +70,7 @@ pipeline {
                             // echo update_list
                             // echo "${files}"
                             // upload_to_s3(repo_name, create_list, update_list)
+                            echo "${updates_map}"
                             echo "Ok"
 
                             // if (sh "git diff-tree --no-commit-id --name-only -r ${env.GIT_COMMIT}" == "upload_file.json"){
