@@ -1,10 +1,14 @@
+import groovy.json.JsonOutput
+
+
 def upload_to_s3(updates_map) {
      withCredentials([[
             $class : 'AmazonWebServicesCredentialsBinding',
             credentialsId : 'aws-jenkins-cli',
             accessKeyVariable : 'AWS_ACCESS_KEY_ID',
             secretKeyVariable : 'AWS_SECRET_ACCESS_KEY',]]){
-            sh "curl -X POST -d ${updates_map} https://rkcn3zza99.execute-api.us-east-1.amazonaws.com/poc/create-poc"
+            updates_json = JsonOutput.toJson(updates_map)
+            sh "curl -X POST -d ${updates_json} https://rkcn3zza99.execute-api.us-east-1.amazonaws.com/poc/create-poc"
             // def res = httpRequest(url: 'https://rkcn3zza99.execute-api.us-east-1.amazonaws.com/poc/create-poc', acceptType: 'APPLICATION_JSON', contentType: 'APPLICATION_JSON', httpMode: 'POST', requestBody: {})
             // echo "${res}"
         }
@@ -36,7 +40,7 @@ pipeline {
                             // def files = sh "git diff-tree --no-commit-id --name-only -r ${env.GIT_COMMIT}"
                             def files = sh (returnStdout: true, script: "git diff-tree --no-commit-id --name-status -r ${env.GIT_COMMIT}").split()
                             int index = 0
-                            def updates_map = {"filesAdded": {}, "filesModified": {}}
+                            def updates_map = ["filesAdded": [:], "filesModified": [:]]
 
                             while  (index < files.length){
                                 if (files[index+1].endsWith("security_template.yaml") || files[index+1].endsWith("ignores.yaml")){
@@ -64,7 +68,7 @@ pipeline {
                             // echo update_list
                             // echo "${files}"
                             echo "${updates_map}"
-                            // upload_to_s3(updates_map)
+                            upload_to_s3(updates_map)
                             echo "Ok"
 
                             // if (sh "git diff-tree --no-commit-id --name-only -r ${env.GIT_COMMIT}" == "upload_file.json"){
