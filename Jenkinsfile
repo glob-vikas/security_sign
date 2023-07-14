@@ -42,17 +42,15 @@ pipeline {
                             // def files = sh "git diff-tree --no-commit-id --name-only -r ${env.GIT_COMMIT}"
                             def files = sh (returnStdout: true, script: "git diff-tree --no-commit-id --name-status -r ${env.GIT_COMMIT}").split()
                             int index = 0
-                            def updates_map = [:]
-                            updates_map["filesAdded"] = []
-                             for (element in updates_map) {
-                                echo "${element.key} ${element.value}"
-                            }
-                            echo "${updates_map}"
+                            def updates_map = ["filesAdded": [:], "filesModified": [:]]
+                            def a = updates_map["filesAdded"]
+                            def b = updates_map["c"]
+                            echo "${a}"
+                            echo "${b}"
                             while  (index < files.length){
                                 if (files[index+1].endsWith("security_template.yaml") || files[index+1].endsWith("ignores.yaml")){
-                                    echo "my"
-                                    repo_name = files[index+1].split('/')[0]
-                                    def file_name = files[index+1].split('/')[-1]
+                                    project_name = files[index+1].split('/')[0]
+                                    updates_map["filesAdded"][project_name]
                                     if (files[index] == "A"){
                                         echo "create"
                                         create_list.add(file_name)
