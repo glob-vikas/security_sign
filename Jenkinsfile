@@ -30,13 +30,17 @@ pipeline {
                 steps {
                     script{
                         if (env.BRANCH_NAME == 'main'){
-                            def files = sh (returnStdout: true, script: "git diff-tree --no-commit-id --name-status -r HEAD").split()
+                            // def files = sh (returnStdout: true, script: "git diff-tree --no-commit-id --name-status -r HEAD").split()
                             // def files = sh (returnStdout: true, script: "git diff-tree --no-commit-id --name-status -r ${env.GIT_COMMIT}").split()
+                            // echo "${files}".
+
+
+                            def files = sh (returnStdout: true, script: "git log -m -1 --name-status --pretty=format: ${env.GIT_COMMIT}").split()
+
                             echo "${files}"
+                            
 
-                            sh "git log -m -1 --name-status  ${env.GIT_COMMIT}"
-
-                            sh "git diff --name-status -r ${env.GIT_COMMIT}"
+                            // sh "git diff --name-status -r ${env.GIT_COMMIT}"
 
 
                             int index = 0
