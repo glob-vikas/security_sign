@@ -31,6 +31,7 @@ pipeline {
                     script{
                         if (env.BRANCH_NAME == 'main'){
                             def files = sh (returnStdout: true, script: "git diff-tree --no-commit-id --name-status -r ${env.GIT_COMMIT}").split()
+                            echo "${files}"
                             int index = 0
                             def updates_map = ["filesAdded": [:], "filesModified": [:]]
                             while  (index < files.length){
