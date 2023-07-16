@@ -34,9 +34,11 @@ pipeline {
                             // def files = sh (returnStdout: true, script: "git diff-tree --no-commit-id --name-status -r ${env.GIT_COMMIT}").split()
                             echo "${files}"
 
-                            sh "git log -m -1 --name-only  ${env.GIT_COMMIT}"
+                            sh "git log -m -1 --name-status  ${env.GIT_COMMIT}"
 
-                            sh "git diff --name-status"
+                            sh "git diff --name-status -r ${env.GIT_COMMIT}"
+
+
                             int index = 0
                             def updates_map = ["filesAdded": [:], "filesModified": [:]]
                             while  (index < files.length){
