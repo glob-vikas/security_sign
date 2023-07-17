@@ -69,7 +69,7 @@ pipeline {
                                 index = index + 2
                             }
                             echo "${updates_map}"
-                            // upload_to_s3(updates_map)
+                            upload_to_s3(updates_map)
                         }
                     }
             }
