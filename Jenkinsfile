@@ -30,7 +30,7 @@ pipeline {
 
                             def user_info = sh (returnStdout: true, script: "git remote get-url origin").split("/")
 
-                            def repo_name = user_info[-1].split("\.")
+                            def repo_name = user_info[-1].split(".")
                             
                             echo "${user_info[-2]}"
                             
