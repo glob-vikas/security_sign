@@ -1,4 +1,0 @@
-SNYK: [""]
-TRIVY: [""]
-OWASP: [""]
-CHECKOV: ["TEST-123"]
