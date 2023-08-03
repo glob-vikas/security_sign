@@ -29,10 +29,12 @@ pipeline {
                             echo "${files}"
 
                             def user_info = sh (returnStdout: true, script: "git remote get-url origin").split("/")
+
+                            def repo_name = user_info[-1].split(".")[0]
                             
-                            echo "${user_info[0]}"
+                            echo "${user_info[-2]}"
                             
-                            echo "${user_info[-1]}"
+                            echo "${repo_name}"
 
                             // sh "git diff --name-status -r ${env.GIT_COMMIT}"
 
