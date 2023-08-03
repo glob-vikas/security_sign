@@ -1,0 +1,12 @@
+SNYK:
+  - HIGH
+TRIVY:
+  - HIGH
+  - MEDIUM
+OWASP:
+  - HIGH
+  - MEDIUM
+CHECKOV:
+  - HIGH
+  - MEDIUM
+  - LOW
