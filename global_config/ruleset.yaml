@@ -9,4 +9,3 @@ OWASP:
 CHECKOV:
   - HIGH
   - MEDIUM
-  - CRITICAL
