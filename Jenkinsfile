@@ -13,12 +13,6 @@ def upload_to_s3(updates_map) {
                     sh "curl -H 'Accept: application/json' -X POST --data '${create}' https://rkcn3zza99.execute-api.us-east-1.amazonaws.com/poc/create-poc"
                     echo "Invoked Cread Project Lambda"
                 }
-                // if (updates_map["filesModified"].size()>0){
-                //     def updates_json = JsonOutput.toJson(updates_map["filesModified"])
-                //     def updates = updates_json.toString()
-                //     sh "curl -H 'Accept: application/json' -X POST --data '${updates}' https://mc7tyk45r1.execute-api.us-east-1.amazonaws.com/poc-up/update-files-poc"
-                //     echo "Invoked Update files Lambda"
-                // }
         }
 }
 
@@ -30,46 +24,44 @@ pipeline {
                 steps {
                     script{
                         if (env.BRANCH_NAME == 'main'){
-                            // def files = sh (returnStdout: true, script: "git diff-tree --no-commit-id --name-status -r HEAD").split()
-                            // def files = sh (returnStdout: true, script: "git diff-tree --no-commit-id --name-status -r ${env.GIT_COMMIT}").split()
-                            // echo "${files}".
-
-
                             def files = sh (returnStdout: true, script: "git log -m -1 --name-status --pretty=format: ${env.GIT_COMMIT}").split()
 
                             echo "${files}"
+
+                            def user_info = sh (returnStdout: true, script: "git remote get-url origin").split()
                             
+                            echo "${user_info}"
 
                             // sh "git diff --name-status -r ${env.GIT_COMMIT}"
 
 
                             int index = 0
-                            def updates_map = ["filesAdded": [:], "filesModified": [:]]
+                            def updates_map = ["files_added": [:], "files_modified": [:]]
                             while  (index < files.length){
-                                if (files[index+1].endsWith("security_template.yaml") || files[index+1].endsWith("ignores.yaml")){
+                                if (files[index+1].endsWith("configuration.yaml") || files[index+1].endsWith("ignore.yaml") || files[index+1].endsWith("ruleset.yaml")){
                                     def project_name = files[index+1].split('/')[0]
                                     
                                     if (files[index] == "A"){
-                                        if (updates_map["filesAdded"][project_name]){
-                                            updates_map["filesAdded"][project_name].add(files[index+1])
+                                        if (updates_map["files_added"][project_name]){
+                                            updates_map["files_added"][project_name].add(files[index+1])
                                         }
                                         else{
-                                            updates_map["filesAdded"][project_name] = [files[index+1]]
+                                            updates_map["files_added"][project_name] = [files[index+1]]
                                         }
                                     }
                                     else if(files[index] == "M"){
-                                        if (updates_map["filesModified"][project_name]){
-                                            updates_map["filesModified"][project_name].add(files[index+1])
+                                        if (updates_map["files_modified"][project_name]){
+                                            updates_map["files_modified"][project_name].add(files[index+1])
                                         }
                                         else{
-                                            updates_map["filesModified"][project_name] = [files[index+1]]
+                                            updates_map["files_modified"][project_name] = [files[index+1]]
                                         }
                                     }
                                 }
                                 index = index + 2
                             }
                             echo "${updates_map}"
-                            upload_to_s3(updates_map)
+                            // upload_to_s3(updates_map)
                         }
                     }
             }
