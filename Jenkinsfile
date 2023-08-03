@@ -28,7 +28,7 @@ pipeline {
 
                             echo "${files}"
 
-                            def user_info = sh (returnStdout: true, script: "git remote get-url origin").split()
+                            def user_info = sh (returnStdout: true, script: "git remote get-url origin").split("/")
                             
                             echo "${user_info}"
 
