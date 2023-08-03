@@ -1,5 +1,0 @@
-rule_set:
-  SNYK: ["HIGH", "MEDIUM"]
-  TRIVY: ["HIGH", "MEDIUM", "CR"]
-  CHECKOV: ["HIGH", "MEDIUM"]
-  OWASP: ["HIGH", "MEDIUM"]
