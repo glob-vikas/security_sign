@@ -26,6 +26,8 @@ pipeline {
                         if (env.BRANCH_NAME == 'main'){
                             def files = sh (returnStdout: true, script: "git log -m -1 --name-status --pretty=format: ${env.GIT_COMMIT}").split()
 
+                            echo "${files}"
+
                             def user_info = sh (returnStdout: true, script: "git remote get-url origin").split("/")
 
                             def repo_name = user_info[-1].split("\\.")[0]
