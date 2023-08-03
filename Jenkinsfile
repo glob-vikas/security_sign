@@ -7,7 +7,7 @@ def upload_to_s3(updates_map) {
             credentialsId : 'aws-jenkins-cli',
             accessKeyVariable : 'AWS_ACCESS_KEY_ID',
             secretKeyVariable : 'AWS_SECRET_ACCESS_KEY',]]){
-                if (updates_map["filesAdded"] || updates_map["filesModified"]){
+                if (updates_map["files_added"] || updates_map["files_modified"]){
                     def create_json = JsonOutput.toJson(updates_map)
                     def create = create_json.toString()
                     sh "curl -H 'Accept: application/json' -X POST --data '${create}' https://rkcn3zza99.execute-api.us-east-1.amazonaws.com/poc/create-poc"
