@@ -2,11 +2,6 @@ import groovy.json.JsonOutput
 
 
 def upload_to_s3(updates_map) {
-     withCredentials([[
-            $class : 'AmazonWebServicesCredentialsBinding',
-            credentialsId : 'aws-jenkins-cli',
-            accessKeyVariable : 'AWS_ACCESS_KEY_ID',
-            secretKeyVariable : 'AWS_SECRET_ACCESS_KEY',]]){
                 // if (updates_map["files_added"] || updates_map["files_modified"]){
                     def create_json = JsonOutput.toJson(updates_map)
                     def create = create_json.toString()
@@ -16,7 +11,6 @@ def upload_to_s3(updates_map) {
 
                     echo "${response}"
                 // }
-        }
 }
 
 
