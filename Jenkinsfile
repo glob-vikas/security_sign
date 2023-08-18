@@ -1,5 +1,5 @@
 import groovy.json.JsonOutput
-import groovy.json.JsonSlurper JsonSlurper().parseText(ResponseMessage)
+import groovy.json.JsonSlurper
 
 
 def upload_to_s3(updates_map) {
