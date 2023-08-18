@@ -10,7 +10,7 @@ def upload_to_s3(updates_map) {
                     
                     echo "Invoked Cread Project Lambda"
                     def res = new JsonSlurper().parseText(response)
-                    echo "${res}"
+                    echo "${res['status']}"
                 // }
 }
 
