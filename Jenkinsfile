@@ -5,7 +5,7 @@ def upload_to_s3(updates_map) {
                 // if (updates_map["files_added"] || updates_map["files_modified"]){
                     def create_json = JsonOutput.toJson(updates_map)
                     def create = create_json.toString()
-                    def response = sh (returnStdout: true, script: "curl -H 'Accept: application/json' -H 'x-api-key: T0KTK0PiEy3mGInEKocgT242ADFCrbU56udymxKD'  -X POST --data '${updates}' https://iwk7rkxnt5.execute-api.us-east-1.amazonaws.com/dev/new_project")
+                    def response = sh (returnStdout: true, script: "curl -H 'Accept: application/json' -H 'x-api-key: T0KTK0PiEy3mGInEKocgT242ADFCrbU56udymxKD'  -X POST --data '${create}' https://iwk7rkxnt5.execute-api.us-east-1.amazonaws.com/dev/new_project")
                     
                     echo "Invoked Cread Project Lambda"
 
