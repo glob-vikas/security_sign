@@ -9,7 +9,7 @@ def upload_to_s3(updates_map) {
                     def response = sh (returnStdout: true, script: "curl -H 'Accept: application/json' -H 'x-api-key: T0KTK0PiEy3mGInEKocgT242ADFCrbU56udymxKD'  -X POST --data '${create}' https://iwk7rkxnt5.execute-api.us-east-1.amazonaws.com/dev/new_project")
                     
                     echo "Invoked Cread Project Lambda"
-                    def res = new JsonSlurper().parseText(ResponseMessage)
+                    def res = new JsonSlurper().parseText(response)
                     echo "${res}"
                 // }
 }
