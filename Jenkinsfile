@@ -9,7 +9,7 @@ def upload_to_s3(updates_map) {
                     
                     echo "Invoked Cread Project Lambda"
 
-                    echo "${response}"
+                    echo "${response['status']}"
                 // }
 }
 
@@ -17,7 +17,7 @@ def upload_to_s3(updates_map) {
 pipeline {
     agent any
     stages {
-            stage('Build') {
+            stage('Update S3') {
                 steps {
                     script{
                         if (env.BRANCH_NAME == 'main'){
