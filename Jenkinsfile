@@ -12,7 +12,7 @@ def upload_to_s3(updates_map) {
                     def res = new JsonSlurper().parseText(response)
                     
                     if (res["status"] == "Fail"){
-                        echo "Failes in API"
+                        echo "Failed in API"
                         error(res["message"])
                     }else{
                         echo "${res['message']}"
