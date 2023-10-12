@@ -2,10 +2,10 @@ import groovy.json.JsonOutput
 import groovy.json.JsonSlurper
 
 
-def upload_to_s3(updates_map, aws_api) {
+def upload_to_s3(updates_map, aws_api, cred_id) {
     // Method to call api to invoke new_project lambda with map as payload.
 
-     withCredentials([string(credentialsId: 'aws-s3-api-key', variable: 'TOKEN')]){
+     withCredentials([string(credentialsId: cred_id, variable: 'TOKEN')]){
         // Using api key from jenkins credentials
 
             def updates_json = JsonOutput.toJson(updates_map)
@@ -30,7 +30,7 @@ def upload_to_s3(updates_map, aws_api) {
         }
 }
 
-def common_ops(aws_api){
+def common_ops(aws_api, cred_id){
    def files = sh (returnStdout: true, script: "git log -m -1 --name-status --pretty=format: ${env.GIT_COMMIT}").split()
         // Command to track all the changed files in the current commit and to store that as a list with their Mode
         // Ex: M for Modified, A for Added etc
@@ -97,7 +97,7 @@ def common_ops(aws_api){
         // Checked if there is any file inside files_added key or files_modified key. if yes, call upload_to_s3()
 
         if (updates_map["files_added"] || updates_map["files_modified"]){
-            upload_to_s3(updates_map, aws_api)
+            upload_to_s3(updates_map, aws_api, cred_id)
         }
 }
 
@@ -109,11 +109,11 @@ pipeline {
                     script{
                             if (env.BRANCH_NAME == 'develop'){
                                 aws_api = "https://wo8pv3sbi5.execute-api.us-east-1.amazonaws.com/dev/new_project"
-                                common_ops(aws_api)
+                                common_ops(aws_api, "new-project-poc-api-key")
                             }
                             else if(env.BRANCH_NAME == 'staging'){
                                 aws_api = "https://f9td53xu89.execute-api.us-east-1.amazonaws.com/dev/new_project"
-                                common_ops(aws_api)
+                                common_ops(aws_api, "new-project-staging-api-key")
                             }
                         }
                     }
