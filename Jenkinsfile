@@ -12,19 +12,21 @@ def upload_to_s3(updates_map, aws_api) {
             // converted map into json
 
             def updates = updates_json.toString()
+
+            echo "${updates}"
             // converted json into string, so that it can be send as payload.
 
-            def response = sh (returnStdout: true, script: "curl -H 'Accept: application/json' -H 'x-api-key: ${TOKEN}'  -X POST --data '${updates}' '${aws_api}'")
+            // def response = sh (returnStdout: true, script: "curl -H 'Accept: application/json' -H 'x-api-key: ${TOKEN}'  -X POST --data '${updates}' '${aws_api}'")
 
-            def res = new JsonSlurper().parseText(response)
+            // def res = new JsonSlurper().parseText(response)
             // converted response into valid json and print message as per the response.
             
-            if (res["status"] == "Fail"){
-                echo "Failed in API"
-                error(res["message"])
-            }else{
-                echo "${res['message']}"
-            } 
+            // if (res["status"] == "Fail"){
+            //     echo "Failed in API"
+            //     error(res["message"])
+            // }else{
+            //     echo "${res['message']}"
+            // } 
         }
 }
 
