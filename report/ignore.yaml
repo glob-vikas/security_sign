@@ -1,0 +1,7 @@
+componentUUID: ""
+componentName: "report"
+ignores:
+  - tool: SNYK
+    ignores: []
+  - tool: TRIVY
+    ignores: []

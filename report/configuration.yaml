@@ -1,0 +1,4 @@
+componentUUID: ""
+componentName: ""
+configuration:
+  - tool: ["SNYK", "TRIVY"]
