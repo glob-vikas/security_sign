@@ -5,7 +5,7 @@ import groovy.json.JsonSlurper
 def upload_to_s3(updates_map, aws_api, cred_id) {
     // Method to call api to invoke new_project lambda with map as payload.
 
-     withCredentials([string(credentialsId: cred_id, variable: 'TOKEN')]){
+    //  withCredentials([string(credentialsId: cred_id, variable: 'TOKEN')]){
         // Using api key from jenkins credentials
 
             def updates_json = JsonOutput.toJson(updates_map)
@@ -14,6 +14,8 @@ def upload_to_s3(updates_map, aws_api, cred_id) {
             def updates = updates_json.toString()
 
             echo "${updates}"
+
+            echo "${cred_id}"
             // converted json into string, so that it can be send as payload.
 
             // def response = sh (returnStdout: true, script: "curl -H 'Accept: application/json' -H 'x-api-key: ${TOKEN}'  -X POST --data '${updates}' '${aws_api}'")
@@ -27,7 +29,7 @@ def upload_to_s3(updates_map, aws_api, cred_id) {
             // }else{
             //     echo "${res['message']}"
             // } 
-        }
+        // }
 }
 
 def common_ops(aws_api, cred_id){
