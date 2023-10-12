@@ -1,0 +1,5 @@
+ignores:
+  - tool: SNYK
+    ignores: []
+  - tool: TRIVY
+    ignores: []
